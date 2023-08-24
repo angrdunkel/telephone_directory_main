@@ -33,7 +33,15 @@ class AddData:
             json.dump(data, file, indent=2, ensure_ascii=False)
         return True
     
+    def all_date(data, path):
+        with open(path, "w") as file:
+            json.dump(data, file, indent=2, ensure_ascii=False)
+        return True
     
+    def check_edit_request(request):
+        if request == '':
+            return False
+        return True
 
 add_data = AddData
 
@@ -93,24 +101,24 @@ class GetData():
     def find_data(request, data, find_type):
         if find_type == 'last-name':
             print('Last name result: ')
-            type = "last_name"
+            request_type = "last_name"
         if find_type == 'first-name':
             print('First name result: ')
-            type = "first_name"
+            request_type = "first_name"
         if find_type == 'midle-name':
             print('Midle name result: ')
-            type = "midle_name"
+            request_type = "midle_name"
         if find_type == 'organization':
             print('Organization name result: ')
-            type = "organization"
+            request_type = "organization"
         if find_type == 'phone':
             print('Phone result: ')
-            type = "phone"
+            request_type = "phone"
         if find_type == 'mobile-phone':
             print('Pobile phone result: ')
-            type = "mobile_phone"
+            request_type = "mobile_phone"
         
-        find_results = list(filter(lambda x:x[type]==request,data))
+        find_results = list(filter(lambda x:x[request_type]==request,data))
         print('Results: ', len(find_results))
         if len(find_results) != 0:
             for row, result in enumerate(find_results):
@@ -134,6 +142,8 @@ class GetData():
             print('Eroor: Too big request (request should be no more than one word)')
             return False
         return True
+    
+
 
 get_data = GetData
 
@@ -196,13 +206,8 @@ class Commands():
             data = get_data.given_directory(path)            
             print()   
             command = input("Enter command: ")
-            if command not in standart_commands:
-                print()                
-                print('Error comand!')
-                print('Snandart commands: ')
-                for row, command in enumerate(standart_commands):
-                    print(f'{row+1} - {command}')
-            elif command == 'exit':
+                            
+            if command == 'exit':
                 print()
                 print ('Аpplication completed')
                 break
@@ -235,9 +240,9 @@ class Commands():
                 while True:
                     print()
                     print('Search types:')
-                    for row, type in enumerate(search_type_command):
-                        print(f'{row+1} - {type}')
-                    find_command = input('Enter search type or exit: ')
+                    for row, request_type in enumerate(search_type_command):
+                        print(f'{row+1} - {request_type}')
+                    find_command = input('Enter search request_type or exit: ')
                     if find_command == 'exit':
                         break
                     if find_command == 'all':
@@ -301,11 +306,64 @@ class Commands():
                                 get_data.find_data(request, data, find_command)
                             else:
                                 break
-
+                
                     else:
                         print('Error command')
+            elif command == 'edit':
+                while True:
+                    id = input('Enter id or exit: ')
+                    last_name = input('Enter Last name or "enter" button to skip: ')
+                    first_name = input('Enter Fast name or "enter" button to skip: ')
+                    midle_name = input('Enter Midle name or "enter" button to skip: ')
+                    organization = input('Enter Organization name or "enter" button to skip: ')
+                    phone = input('Enter Phone or "enter" button to skip: ')
+                    mobile_phone = input('Enter Mobile phone or "enter" button to skip: ')
+                    start_edit = input('To make changes enter "Y" if cancel any other value: ')
 
+                    if id == 'exit':
+                        break
+                    try:
+                       
+                        id = int(id)
+                        not_result = True
+                        line_num = 0                        
+                        for row in data:
+                            if row['id'] == id:
+                                not_result = False
+                                if add_data.check_edit_request(last_name):
+                                    row['last_name'] = last_name
+                                if add_data.check_edit_request(first_name):
+                                    row['first_name'] = first_name
+                                if add_data.check_edit_request(midle_name):
+                                    row['midle_name'] = midle_name
+                                if add_data.check_edit_request(organization):
+                                    row['organization'] = organization
+                                if add_data.check_edit_request(phone):
+                                    row['phone'] = phone
+                                if add_data.check_edit_request(mobile_phone):
+                                    row['mobile_phone'] = mobile_phone
+                                while True:
+                                    if start_edit == 'Y' or start_edit == 'y':
+                                        add_data.all_date(data, path)
+                                        print('Changes saved')
+                                        break
+                                    elif start_edit == '':
+                                        start_edit = input('To make changes enter "Y" or "y" if cancel any other value: ')
+                                    else:
+                                        print('Changes not saved')
+                                        break
 
+                                break
+                        if not_result:
+                            print(f'Id: {id} not found')                        
+                    except:
+                        print(f'Error id: {id}')
+            else:
+                print()                
+                print('Error comand!')
+                print('Snandart commands: ')
+                for row, command in enumerate(standart_commands):
+                    print(f'{row+1} - {command}')
                             
                 
                 
