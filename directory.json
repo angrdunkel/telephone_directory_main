@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": 1,
     "first_name": "Joop",
     "last_name": "Pauwelussen",
     "midle_name": "P",
@@ -9,7 +9,7 @@
     "mobile_phone": "+1768758"
   },
   {
-    "id": "2",
+    "id": 2,
     "first_name": "Djo",
     "last_name": "Wocker",
     "midle_name": "D",
@@ -18,12 +18,39 @@
     "mobile_phone": "+176875764764"
   },
   {
-    "id": "3",
+    "id": 3,
     "first_name": "adgadg",
     "last_name": "dsfdag",
     "midle_name": "adgad",
     "organization": "adggadbadfb",
     "phone": "3435236",
     "mobile_phone": "464562546"
+  },
+  {
+    "id": 4,
+    "first_name": "Andrey",
+    "last_name": "Test",
+    "midle_name": "Testing",
+    "organization": "Test organization",
+    "phone": "+1787585764764",
+    "mobile_phone": "+1768756746"
+  },
+  {
+    "id": 5,
+    "first_name": "Andrey",
+    "last_name": "Test",
+    "midle_name": "Ttttt",
+    "organization": "Organization",
+    "phone": "+13363557",
+    "mobile_phone": "+135735673567"
+  },
+  {
+    "id": 6,
+    "first_name": "Test",
+    "last_name": "Andrey",
+    "midle_name": "Ttttt",
+    "organization": "Organization",
+    "phone": "+13363557",
+    "mobile_phone": "+135735673567"
   }
 ]

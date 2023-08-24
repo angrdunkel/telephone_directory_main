@@ -8,27 +8,22 @@ standart_commands = [
     'find',
     'edit',
     'output',
-    'exit'    
+    'exit',
+    'help'    
+]
+
+search_type_command = [
+    'all',
+    'last-name',
+    'first-name',
+    'midle-name',
+    'organization',
+    'phone',
+    'mobile-phone',
+    'exit'
 ]
 
 path = 'directory.json'
 
-if __name__ == "__main__":
-
-    
-    commands.command_processing(standart_commands, path)
-    #json_data = get_data.given_directory('directory.json')
-    #print(json_data)
-    
-    
-    #data = 'Test'
-    #add_data.add_given_directory(data)
-    #data = []
-    #json_data = {
-    #    "name": 'name',
-    #    "phone": 'phone',
-    #}
-    #data = json.load(open("db.json"))
-    #data.append(json_data)
-    #with open("db.json", "w") as file:
-    #    json.dump(data, file, indent=2, ensure_ascii=False)
+if __name__ == "__main__":    
+    commands.command_processing(standart_commands, search_type_command, path)
